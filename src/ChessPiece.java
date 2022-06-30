@@ -13,6 +13,7 @@ public abstract class ChessPiece {
     public abstract String getSymbol();
 
     protected boolean isNotValid(int coordinate) {
-        return coordinate < 0 || coordinate >= 8;
+        if (coordinate >= 0 && coordinate < 8) return false;
+        return true;
     }
 }
