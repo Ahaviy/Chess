@@ -1,5 +1,6 @@
-public class Bishop extends ChessPiece {
-    public Bishop(String color) {
+public class Rook extends ChessPiece {
+
+    public Rook(String color) {
         super(color);
     }
 
@@ -10,13 +11,13 @@ public class Bishop extends ChessPiece {
 
     @Override
     public String getSymbol() {
-        return "B";
+        return "R";
     }
 
     @Override
     public boolean canMoveToPosition(ChessBoard chessBoard, int line, int colum, int toLine, int toColumn) {
         if (isCoordinateNotValid(line, toLine, colum, toColumn)) return false;
-        if ((line - toLine == colum - toColumn) || (line - toLine == toColumn - colum)) return true;
+        if ((colum == toColumn && line != toLine) || (colum != toColumn && line == toLine)) return true;
         return false;
     }
 }
