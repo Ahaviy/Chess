@@ -1,6 +1,5 @@
-public class Rook extends ChessPiece {
-
-    public Rook(String color) {
+public class Queen extends ChessPiece{
+    public Queen(String color) {
         super(color);
     }
 
@@ -11,13 +10,14 @@ public class Rook extends ChessPiece {
 
     @Override
     public String getSymbol() {
-        return "R";
+        return "Q";
     }
 
     @Override
     public boolean canMoveToPosition(ChessBoard chessBoard, int line, int colum, int toLine, int toColumn) {
         if (isCoordinatesNotValid(line, toLine, colum, toColumn)) return false;
         if ((colum == toColumn && line != toLine) || (colum != toColumn && line == toLine)) return true;
+        if ((line - toLine == colum - toColumn) || (line - toLine == toColumn - colum)) return true;
         return false;
     }
 }

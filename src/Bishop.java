@@ -15,7 +15,7 @@ public class Bishop extends ChessPiece {
 
     @Override
     public boolean canMoveToPosition(ChessBoard chessBoard, int line, int colum, int toLine, int toColumn) {
-        if (isCoordinateNotValid(line, toLine, colum, toColumn)) return false;
+        if (isCoordinatesNotValid(line, toLine, colum, toColumn)) return false;
         if ((line - toLine == colum - toColumn) || (line - toLine == toColumn - colum)) return true;
         return false;
     }

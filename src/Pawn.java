@@ -15,7 +15,7 @@ public class Pawn extends ChessPiece {
 
     @Override
     public boolean canMoveToPosition(ChessBoard chessBoard, int line, int colum, int toLine, int toColumn) {
-        if (isCoordinateNotValid(line, toLine, colum, toColumn)) return false;
+        if (isCoordinatesNotValid(line, toLine, colum, toColumn)) return false;
         if (colum != toColumn) return false;
         if (color.equals("White")) {
             if ((line == 1 && toLine == 3) || ((toLine - line) == 1)) return true;

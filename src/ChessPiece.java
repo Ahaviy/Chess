@@ -12,7 +12,7 @@ public abstract class ChessPiece {
 
     public abstract String getSymbol();
 
-    protected boolean isCoordinateNotValid(int line, int toLine, int colum, int toColumn) {
+    protected boolean isCoordinatesNotValid(int line, int toLine, int colum, int toColumn) {
         if (isOutOfBorder(line) || isOutOfBorder(colum) || isOutOfBorder(toLine) || isOutOfBorder(toColumn))
             return true;
         if (line == toLine && colum == toColumn) return true;
