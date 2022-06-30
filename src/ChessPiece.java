@@ -11,4 +11,8 @@ public abstract class ChessPiece {
     public abstract boolean canMoveToPosition(ChessBoard chessBoard, int line, int colum, int toLine, int toColumn);
 
     public abstract String getSymbol();
+
+    protected boolean isNotValid(int coordinate) {
+        return coordinate < 0 || coordinate >= 8;
+    }
 }
