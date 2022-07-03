@@ -1,4 +1,6 @@
 public class Pawn extends ChessPiece {
+
+    boolean isCanBeEatenOnTheAisle = false;
     public Pawn(String color) {
         super(color);
     }

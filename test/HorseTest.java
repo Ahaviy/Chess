@@ -10,7 +10,6 @@ class HorseTest extends PieceTest {
         Horse blackHorse = new Horse("Black");
         assertEquals(whiteHorse.getColor(), "White");
         assertEquals(blackHorse.getColor(), "Black");
-
     }
 
     @Test
@@ -22,9 +21,7 @@ class HorseTest extends PieceTest {
     @Test
     void canMoveToPosition() {
         //Проверка недопустимых параметров
-        if (isNotValid(new Horse("White"))) {
-            assert (false);
-        }
+        assert (checkNotValid(new Horse("White")));
 
         //Проверка на чистой доске
         ChessBoard chessBoard = new ChessBoard("White");

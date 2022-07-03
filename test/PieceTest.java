@@ -1,37 +1,36 @@
 public class PieceTest {
 
-    protected boolean isNotValid(ChessPiece piece) {
+    protected boolean checkNotValid(ChessPiece piece) {
         ChessBoard chessBoard = new ChessBoard("White");
         chessBoard.board[3][3] = piece;
-        int[][] notValidMovies = new int[][]{{-1, 5}, {4, -5}, {3, 9}, {8, 6}, {3, 3}};
         if (chessBoard.board[3][3].canMoveToPosition(chessBoard, 3, 3, 3, 3)) {
-            return true;
+            return false;
         }
         for (int toLine = -10; toLine < 0; toLine++) {
             for (int toColum = -10; toColum < 0; toColum++) {
                 if (chessBoard.board[3][3].canMoveToPosition(chessBoard, 3, 3, toLine, toColum)) {
-                    return true;
+                    return false;
                 }
             }
             for (int toColum = 8; toColum < 18; toColum++) {
                 if (chessBoard.board[3][3].canMoveToPosition(chessBoard, 3, 3, toLine, toColum)) {
-                    return true;
+                    return false;
                 }
             }
         }
         for (int toLine = 8; toLine < 18; toLine++) {
             for (int toColum = -10; toColum < 0; toColum++) {
                 if (chessBoard.board[3][3].canMoveToPosition(chessBoard, 3, 3, toLine, toColum)) {
-                    return true;
+                    return false;
                 }
             }
             for (int toColum = 8; toColum < 18; toColum++) {
                 if (chessBoard.board[3][3].canMoveToPosition(chessBoard, 3, 3, toLine, toColum)) {
-                    return true;
+                    return false;
                 }
             }
         }
-        return false;
+        return true;
     }
 
     protected boolean checkMovies(ChessBoard chessBoard, int[][] validMovies) {
@@ -49,7 +48,6 @@ public class PieceTest {
                     }
                     if(!isValidMovies) return false;
                 }
-
             }
         }
         return true;

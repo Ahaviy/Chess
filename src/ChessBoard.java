@@ -2,6 +2,8 @@ public class ChessBoard {
     public ChessPiece[][] board = new ChessPiece[8][8]; // creating a field for game
     String nowPlayer;
 
+
+
     public ChessBoard(String nowPlayer) {
         this.nowPlayer = nowPlayer;
     }
@@ -20,6 +22,15 @@ public class ChessBoard {
                 if (board[startLine][startColumn].getSymbol().equals("K") ||  // check position for castling
                         board[startLine][startColumn].getSymbol().equals("R")) {
                     board[startLine][startColumn].check = false;
+                }
+                preMove();
+                //TODO Проверки для пешек
+                if (board[startLine][startColumn].getSymbol().equals("P")){
+                    if (board[startLine][startColumn].getColor().equals("White")) {
+
+                    } else {
+
+                    }
                 }
 
                 board[endLine][endColumn] = board[startLine][startColumn]; // if piece can move, we moved a piece
@@ -66,6 +77,7 @@ public class ChessBoard {
                 if (board[0][0].getColor().equals("White") && board[0][4].getColor().equals("White") &&
                         board[0][0].check && board[0][4].check &&
                         !new King("White").isUnderAttack(this, 0, 2)) { // check that position not in under attack
+                    preMove();
                     board[0][4] = null;
                     board[0][2] = new King("White");   // move King
                     board[0][2].check = false;
@@ -83,6 +95,7 @@ public class ChessBoard {
                 if (board[7][0].getColor().equals("Black") && board[7][4].getColor().equals("Black") &&
                         board[7][0].check && board[7][4].check &&
                         !new King("Black").isUnderAttack(this, 7, 2)) { // check that position not in under attack
+                    preMove();
                     board[7][4] = null;
                     board[7][2] = new King("Black");   // move King
                     board[7][2].check = false;
@@ -104,6 +117,7 @@ public class ChessBoard {
                 if (board[0][7].getColor().equals("White") && board[0][4].getColor().equals("White") &&
                         board[0][7].check && board[0][4].check &&
                         !new King("White").isUnderAttack(this, 0, 6)) { // check that position not in under attack
+                    preMove();
                     board[0][4] = null;
                     board[0][6] = new King("White");   // move King
                     board[0][6].check = false;
@@ -121,6 +135,7 @@ public class ChessBoard {
                 if (board[7][7].getColor().equals("Black") && board[7][4].getColor().equals("Black") &&
                         board[7][7].check && board[7][4].check &&
                         !new King("Black").isUnderAttack(this, 7, 6)) { // check that position not in under attack
+                    preMove();
                     board[7][4] = null;
                     board[7][6] = new King("Black");   // move King
                     board[7][6].check = false;
@@ -132,6 +147,19 @@ public class ChessBoard {
                 } else return false;
             } else return false;
         }
+    }
+
+    private void preMove(){
+//        Проверяем все клетки, ищем все пешки, обнуляем проверку на возможность взятия на проходе
+        for (int Line = 0; Line < 7; Line++) {
+            for (int Colum = 0; Colum < 7; Colum++) {
+                if (board[Line][Colum] != null && board[Line][Colum].getSymbol().equals("P")){
+                    ((Pawn)board[Line][Colum]).isCanBeEatenOnTheAisle =false;
+                }
+            }
+        }
+
+
     }
 
 /*    public boolean castlingWithH() {
