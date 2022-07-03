@@ -24,4 +24,10 @@ public class Pawn extends ChessPiece {
         }
         return false;
     }
+
+    @Override
+    public boolean canAttackToPosition(ChessBoard chessBoard, int line, int colum, int toLine, int toColumn) {
+        return false;
+    }
+
 }

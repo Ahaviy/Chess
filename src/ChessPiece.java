@@ -10,6 +10,8 @@ public abstract class ChessPiece {
 
     public abstract boolean canMoveToPosition(ChessBoard chessBoard, int line, int colum, int toLine, int toColumn);
 
+    public abstract boolean canAttackToPosition(ChessBoard chessBoard, int line, int colum, int toLine, int toColumn);
+
     public abstract String getSymbol();
 
     protected boolean isCoordinatesNotValid(int line, int toLine, int colum, int toColumn) {

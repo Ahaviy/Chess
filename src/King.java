@@ -24,6 +24,11 @@ public class King extends ChessPiece {
         return false;
     }
 
+    @Override
+    public boolean canAttackToPosition(ChessBoard chessBoard, int line, int colum, int toLine, int toColumn) {
+        return false;
+    }
+
     public boolean canMoveToPositionWithoutVerificationIsUnderAttack(ChessBoard chessBoard, int line, int colum, int toLine, int toColumn) {
         if (isCoordinatesNotValid(line, toLine, colum, toColumn)) return false;
         if ((line - toLine >= -1 && line - toLine <= 1) && (colum - toColumn >= -1 && colum - toColumn <= 1)) {

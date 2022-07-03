@@ -20,4 +20,9 @@ public class Queen extends ChessPiece{
         if ((line - toLine == colum - toColumn) || (line - toLine == toColumn - colum)) return true;
         return false;
     }
+
+    @Override
+    public boolean canAttackToPosition(ChessBoard chessBoard, int line, int colum, int toLine, int toColumn) {
+        return false;
+    }
 }
