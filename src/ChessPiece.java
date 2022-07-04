@@ -1,9 +1,14 @@
 public abstract class ChessPiece {
+
     protected String color;
     boolean check = true;
 
     public ChessPiece(String color) {
         this.color = color;
+    }
+
+    public ChessPiece(ColorPiece colorPiece) {
+        this.color = colorPiece.getColor();
     }
 
     public abstract String getColor();

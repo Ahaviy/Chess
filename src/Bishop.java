@@ -3,6 +3,10 @@ public class Bishop extends ChessPiece {
         super(color);
     }
 
+    public Bishop(ColorPiece colorPiece) {
+        super(colorPiece);
+    }
+
     @Override
     public String getColor() {
         return color;

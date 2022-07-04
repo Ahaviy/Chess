@@ -3,6 +3,10 @@ public class Horse extends ChessPiece {
         super(color);
     }
 
+    public Horse(ColorPiece colorPiece) {
+        super(colorPiece);
+    }
+
     @Override
     public String getColor() {
         return color;
@@ -31,4 +35,6 @@ public class Horse extends ChessPiece {
     public String getSymbol() {
         return "H";
     }
+
+
 }

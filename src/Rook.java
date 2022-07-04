@@ -4,6 +4,10 @@ public class Rook extends ChessPiece {
         super(color);
     }
 
+    public Rook(ColorPiece colorPiece) {
+        super(colorPiece);
+    }
+
     @Override
     public String getColor() {
         return color;

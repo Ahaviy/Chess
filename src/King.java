@@ -3,6 +3,10 @@ public class King extends ChessPiece {
         super(color);
     }
 
+    public King(ColorPiece colorPiece) {
+        super(colorPiece);
+    }
+
     @Override
     public String getColor() {
         return color;

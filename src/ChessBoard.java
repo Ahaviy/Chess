@@ -2,7 +2,9 @@ public class ChessBoard {
     public ChessPiece[][] board = new ChessPiece[8][8]; // creating a field for game
     String nowPlayer;
 
-
+    public ChessBoard() {
+        this.nowPlayer = "White";
+    }
 
     public ChessBoard(String nowPlayer) {
         this.nowPlayer = nowPlayer;
@@ -12,29 +14,29 @@ public class ChessBoard {
         return this.nowPlayer;
     }
 
-    public boolean moveToPosition(int startLine, int startColumn, int endLine, int endColumn) {
-        if (checkPos(startLine) && checkPos(startColumn)) {
+    public boolean moveToPosition(int line, int column, int toLine, int toColumn) {
+        if (checkPos(line) && checkPos(column)) {
 
-            if (!nowPlayer.equals(board[startLine][startColumn].getColor())) return false;
+            if (!nowPlayer.equals(board[line][column].getColor())) return false;
 
-            if (board[startLine][startColumn].canMoveToPosition(this, startLine, startColumn, endLine, endColumn)) {
+            if (board[line][column].canMoveToPosition(this, line, column, toLine, toColumn)) {
 
-                if (board[startLine][startColumn].getSymbol().equals("K") ||  // check position for castling
-                        board[startLine][startColumn].getSymbol().equals("R")) {
-                    board[startLine][startColumn].check = false;
+                if (board[line][column].getSymbol().equals("K") ||  // check position for castling
+                        board[line][column].getSymbol().equals("R")) {
+                    board[line][column].check = false;
                 }
                 preMove();
                 //TODO Проверки для пешек
-                if (board[startLine][startColumn].getSymbol().equals("P")){
-                    if (board[startLine][startColumn].getColor().equals("White")) {
+                if (board[line][column].getSymbol().equals("P")){
+                    if (board[line][column].getColor().equals("White")) {
 
                     } else {
 
                     }
                 }
 
-                board[endLine][endColumn] = board[startLine][startColumn]; // if piece can move, we moved a piece
-                board[startLine][startColumn] = null; // set null to previous cell
+                board[toLine][toColumn] = board[line][column]; // if piece can move, we moved a piece
+                board[line][column] = null; // set null to previous cell
 
                 this.nowPlayer = this.nowPlayerColor().equals("White") ? "Black" : "White";
 
@@ -55,7 +57,8 @@ public class ChessBoard {
                 if (board[i][j] == null) {
                     System.out.print(".." + "\t");
                 } else {
-                    System.out.print(board[i][j].getSymbol() + board[i][j].getColor().substring(0, 1).toLowerCase() + "\t");
+                    System.out.print(board[i][j].getSymbol()
+                            + board[i][j].getColor().substring(0, 1).toLowerCase() + "\t");
                 }
             }
             System.out.println();
@@ -154,7 +157,7 @@ public class ChessBoard {
         for (int Line = 0; Line < 7; Line++) {
             for (int Colum = 0; Colum < 7; Colum++) {
                 if (board[Line][Colum] != null && board[Line][Colum].getSymbol().equals("P")){
-                    ((Pawn)board[Line][Colum]).isCanBeEatenOnTheAisle =false;
+                    ((Pawn)board[Line][Colum]).canBeEatenOnTheAisle =false;
                 }
             }
         }

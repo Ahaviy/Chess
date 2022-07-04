@@ -1,30 +1,38 @@
 public class PieceTest {
 
     protected boolean checkNotValid(ChessPiece piece) {
-        ChessBoard chessBoard = new ChessBoard("White");
+        ChessBoard chessBoard = new ChessBoard();
         chessBoard.board[3][3] = piece;
+
+        //Проверка собственных координат
         if (chessBoard.board[3][3].canMoveToPosition(chessBoard, 3, 3, 3, 3)) {
             return false;
         }
+
+        //Проверка четырех диапозонов вне доски
         for (int toLine = -10; toLine < 0; toLine++) {
-            for (int toColum = -10; toColum < 0; toColum++) {
+            for (int toColum = -10; toColum < 8; toColum++) {
                 if (chessBoard.board[3][3].canMoveToPosition(chessBoard, 3, 3, toLine, toColum)) {
                     return false;
                 }
             }
+        }
+        for (int toLine = -10; toLine < 8; toLine++) {
             for (int toColum = 8; toColum < 18; toColum++) {
+                if (chessBoard.board[3][3].canMoveToPosition(chessBoard, 3, 3, toLine, toColum)) {
+                    return false;
+                }
+            }
+        }
+        for (int toLine = 0; toLine < 18; toLine++) {
+            for (int toColum = -10; toColum < 0; toColum++) {
                 if (chessBoard.board[3][3].canMoveToPosition(chessBoard, 3, 3, toLine, toColum)) {
                     return false;
                 }
             }
         }
         for (int toLine = 8; toLine < 18; toLine++) {
-            for (int toColum = -10; toColum < 0; toColum++) {
-                if (chessBoard.board[3][3].canMoveToPosition(chessBoard, 3, 3, toLine, toColum)) {
-                    return false;
-                }
-            }
-            for (int toColum = 8; toColum < 18; toColum++) {
+            for (int toColum = 0; toColum < 18; toColum++) {
                 if (chessBoard.board[3][3].canMoveToPosition(chessBoard, 3, 3, toLine, toColum)) {
                     return false;
                 }
@@ -33,11 +41,11 @@ public class PieceTest {
         return true;
     }
 
-    protected boolean checkMovies(ChessBoard chessBoard, int[][] validMovies) {
+    protected boolean checkMovies(ChessBoard chessBoard, int line, int colum, int[][] validMovies) {
         //Перебираем все клетки доски
         for (int toLine = 0; toLine < 8; toLine++) {
             for (int toColum = 0; toColum < 8; toColum++) {
-                if (chessBoard.board[3][3].canMoveToPosition(chessBoard, 3, 3, toLine, toColum)) {
+                if (chessBoard.board[line][colum].canMoveToPosition(chessBoard, line, colum, toLine, toColum)) {
                     //проверка есть ли в списке validMovies текущие координаты
                     boolean isValidMovies = false;
                     for (int[] validMovie : validMovies) {
@@ -46,10 +54,31 @@ public class PieceTest {
                             break;
                         }
                     }
-                    if(!isValidMovies) return false;
+                    if (!isValidMovies) return false;
                 }
             }
         }
         return true;
     }
+
+    protected boolean checkAttack(ChessBoard chessBoard, int line, int colum, int[][] validAttacks) {
+        //Перебираем все клетки доски
+        for (int toLine = 0; toLine < 8; toLine++) {
+            for (int toColum = 0; toColum < 8; toColum++) {
+                if (chessBoard.board[line][colum].canAttackToPosition(chessBoard, line, colum, toLine, toColum)) {
+                    //проверка есть ли в списке validAttacks текущие координаты
+                    boolean isValidAttacks = false;
+                    for (int[] validAttack : validAttacks) {
+                        if (validAttack[0] == toLine && validAttack[1] == toColum) {
+                            isValidAttacks = true;
+                            break;
+                        }
+                    }
+                    if (!isValidAttacks) return false;
+                }
+            }
+        }
+        return true;
+    }
+
 }
