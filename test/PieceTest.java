@@ -54,7 +54,10 @@ public class PieceTest {
                             break;
                         }
                     }
-                    if (!isValidMovies) return false;
+                    if (!isValidMovies) {
+                        System.out.println("Coordinates not in the list: " + toLine + ", " + toColum);
+                        return false;
+                    }
                 }
             }
         }
