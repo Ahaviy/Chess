@@ -61,6 +61,13 @@ public class PieceTest {
                 }
             }
         }
+
+        for (int[] validMovie : validMovies) {
+            if (!chessBoard.board[line][colum].canMoveToPosition(chessBoard, line, colum, validMovie[0], validMovie[1])) {
+                System.out.println("Coordinates in the list not valid: " + validMovie[0] + ", " + validMovie[1]);
+                return false;
+            }
+        }
         return true;
     }
 
@@ -77,8 +84,17 @@ public class PieceTest {
                             break;
                         }
                     }
-                    if (!isValidAttacks) return false;
+                    if (!isValidAttacks) {
+                        System.out.println("Coordinates not in the list: " + toLine + ", " + toColum);
+                        return false;
+                    }
                 }
+            }
+        }
+        for (int[] validAttack : validAttacks) {
+            if (!chessBoard.board[line][colum].canMoveToPosition(chessBoard, line, colum, validAttack[0], validAttack[1])) {
+                System.out.println("Coordinates in the list not valid: " + validAttack[0] + ", " + validAttack[1]);
+                return false;
             }
         }
         return true;

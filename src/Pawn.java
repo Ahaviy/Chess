@@ -30,7 +30,7 @@ public class Pawn extends ChessPiece {
                 if ((toLine - line) == 1 && chessBoard.board[toLine][toColumn] == null) return true;
             } else {
                 if (line == 6 && toLine == 4 && chessBoard.board[5][colum] == null
-                        && chessBoard.board[6][colum] == null) return true;
+                        && chessBoard.board[4][colum] == null) return true;
                 if ((line - toLine) == 1 && chessBoard.board[toLine][toColumn] == null) return true;
             }
             return false;

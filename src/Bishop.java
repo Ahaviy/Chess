@@ -22,7 +22,7 @@ public class Bishop extends ChessPiece {
         if (isCoordinatesNotValid(line, toLine, colum, toColumn)) return false;
         if (chessBoard.board[toLine][toColumn] != null && isSameColor(chessBoard.board[toLine][toColumn])) return false;
         if (line - toLine == colum - toColumn) {
-            if (line - toLine > 0) {
+            if (line > toLine) {
                 for (int checkingLine = toLine + 1; checkingLine < line; checkingLine++) {
                     int checkingColum = checkingLine - line + colum;
                     if (chessBoard.board[checkingLine][checkingColum] != null) return false; //если на пути есть фигура
@@ -36,7 +36,7 @@ public class Bishop extends ChessPiece {
             return true;
         }
         if (line - toLine == toColumn - colum) {
-            if (line - toLine > 0) {
+            if (line > toLine) {
                 for (int checkingLine = toLine + 1; checkingLine < line; checkingLine++) {
                     int checkingColum = line - checkingLine + colum;
                     if (chessBoard.board[checkingLine][checkingColum] != null) return false; //если на пути есть фигура
