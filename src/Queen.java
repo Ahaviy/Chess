@@ -1,4 +1,4 @@
-public class Queen extends ChessPiece{
+public class Queen extends ChessPiece {
     public Queen(String color) {
         super(color);
     }
@@ -20,13 +20,68 @@ public class Queen extends ChessPiece{
     @Override
     public boolean canMoveToPosition(ChessBoard chessBoard, int line, int colum, int toLine, int toColumn) {
         if (isCoordinatesNotValid(line, toLine, colum, toColumn)) return false;
-        if ((colum == toColumn && line != toLine) || (colum != toColumn && line == toLine)) return true;
-        if ((line - toLine == colum - toColumn) || (line - toLine == toColumn - colum)) return true;
+        if (chessBoard.board[toLine][toColumn] != null && isSameColor(chessBoard.board[toLine][toColumn])) return false;
+        if (colum == toColumn) { //Проверка вертикали
+            if (line > toLine) { //нижняя часть
+                for (int checkingLine = toLine + 1; checkingLine < line; checkingLine++) {
+                    if (chessBoard.board[checkingLine][colum] != null)
+                        return false; //если на пути есть фигура
+                }
+            } else { //верхняя чать
+                for (int checkingLine = toLine - 1; checkingLine > line; checkingLine--) {
+                    if (chessBoard.board[checkingLine][colum] != null) return false; //если на пути есть фигура
+                }
+            }
+            return true;
+        }
+        if (line == toLine) { //Проверка горизантали
+            if (colum > toColumn) { //правая чать
+                for (int checkingColum = toColumn + 1; checkingColum < colum; checkingColum++) {
+                    if (chessBoard.board[line][checkingColum] != null) return false; //если на пути есть фигура
+                }
+            } else { //левая часть
+                for (int checkingColum = toColumn - 1; checkingColum > colum; checkingColum--) {
+                    if (chessBoard.board[line][checkingColum] != null) return false; //если на пути есть фигура
+                }
+            }
+            return true;
+        }
+        if (line - toLine == colum - toColumn) { //Проверка возрастающей диагонали
+            if (line > toLine) {//левая часть
+                for (int checkingLine = toLine + 1; checkingLine < line; checkingLine++) {
+                    int checkingColum = checkingLine - line + colum;
+                    if (chessBoard.board[checkingLine][checkingColum] != null) return false; //если на пути есть фигура
+                }
+            } else { //правая часть
+                for (int checkingLine = toLine - 1; checkingLine > line; checkingLine--) {
+                    int checkingColum = checkingLine - line + colum;
+                    if (chessBoard.board[checkingLine][checkingColum] != null) return false; //если на пути есть фигура
+                }
+            }
+            return true;
+        }
+        if (line - toLine == toColumn - colum) { //Поверка убывающей диагонали
+            if (line > toLine) { //левая часть
+                for (int checkingLine = toLine + 1; checkingLine < line; checkingLine++) {
+                    int checkingColum = line - checkingLine + colum;
+                    if (chessBoard.board[checkingLine][checkingColum] != null)
+                        return false; //если на пути есть фигура
+                }
+            } else { //правая часть
+                for (int checkingLine = toLine - 1; checkingLine > line; checkingLine--) {
+                    int checkingColum = line - checkingLine + colum;
+                    if (chessBoard.board[checkingLine][checkingColum] != null)
+                        return false; //если на пути есть фигура
+                }
+            }
+            return true;
+        }
         return false;
     }
 
     @Override
     public boolean canAttackToPosition(ChessBoard chessBoard, int line, int colum, int toLine, int toColumn) {
-        return false;
+        return canMoveToPosition(chessBoard, line, colum, toLine, toColumn);
     }
+
 }

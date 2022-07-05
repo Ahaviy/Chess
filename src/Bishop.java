@@ -21,13 +21,13 @@ public class Bishop extends ChessPiece {
     public boolean canMoveToPosition(ChessBoard chessBoard, int line, int colum, int toLine, int toColumn) {
         if (isCoordinatesNotValid(line, toLine, colum, toColumn)) return false;
         if (chessBoard.board[toLine][toColumn] != null && isSameColor(chessBoard.board[toLine][toColumn])) return false;
-        if (line - toLine == colum - toColumn) {
-            if (line > toLine) {
+        if (line - toLine == colum - toColumn) { //Проверка возрастающей диагонали
+            if (line > toLine) { //левая часть
                 for (int checkingLine = toLine + 1; checkingLine < line; checkingLine++) {
                     int checkingColum = checkingLine - line + colum;
                     if (chessBoard.board[checkingLine][checkingColum] != null) return false; //если на пути есть фигура
                 }
-            } else {
+            } else { //правая часть
                 for (int checkingLine = toLine - 1; checkingLine > line; checkingLine--) {
                     int checkingColum = checkingLine - line + colum;
                     if (chessBoard.board[checkingLine][checkingColum] != null) return false; //если на пути есть фигура
@@ -35,13 +35,13 @@ public class Bishop extends ChessPiece {
             }
             return true;
         }
-        if (line - toLine == toColumn - colum) {
-            if (line > toLine) {
+        if (line - toLine == toColumn - colum) { //Поверка убывающей диагонали
+            if (line > toLine) { //левая часть
                 for (int checkingLine = toLine + 1; checkingLine < line; checkingLine++) {
                     int checkingColum = line - checkingLine + colum;
                     if (chessBoard.board[checkingLine][checkingColum] != null) return false; //если на пути есть фигура
                 }
-            } else {
+            } else { //правая часть
                 for (int checkingLine = toLine - 1; checkingLine > line; checkingLine--) {
                     int checkingColum = line - checkingLine + colum;
                     if (chessBoard.board[checkingLine][checkingColum] != null) return false; //если на пути есть фигура
