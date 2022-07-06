@@ -2,7 +2,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class QueenTest extends PieceTest {
+class QueenTest {
 
     @Test
     void getColor() {
@@ -21,14 +21,14 @@ class QueenTest extends PieceTest {
     @Test
     void canMoveToPosition() {
         //Проверка недопустимых параметров
-        assert (checkNotValid(new Queen(ColorPiece.WHITE)));
+        assert (PieceTest.checkNotValid(new Queen(ColorPiece.WHITE)));
         //Проверка на чистой доске
         ChessBoard chessBoard = new ChessBoard();
         chessBoard.board[4][2] = new Queen(ColorPiece.BLACK);
         int[][] validMovies = new int[][]{{3, 1}, {2, 0}, {4, 1}, {4, 0}, {5, 1}, {5, 2}, {6, 2}, {7, 2}, {5, 3},
                 {6, 4}, {7, 5}, {4, 3}, {4, 4}, {4, 5}, {4, 6}, {4, 7}, {3, 3}, {2, 4}, {1, 5}, {0, 6}, {3, 2}, {3, 1},
                 {0, 2}, {1, 2}, {2, 2}, {3, 2}, {6, 0}, {5, 1}};
-        assert (checkMovies(chessBoard, 4, 2, validMovies));
+        assert (PieceTest.checkMovies(chessBoard, 4, 2, validMovies));
         //Проверка с фигурами
         chessBoard.board[3][2] = new Pawn(ColorPiece.BLACK);
         chessBoard.board[4][1] = new Rook(ColorPiece.WHITE);
@@ -39,13 +39,13 @@ class QueenTest extends PieceTest {
         chessBoard.board[6][4] = new Horse(ColorPiece.WHITE);
         chessBoard.board[5][1] = new Queen(ColorPiece.BLACK);
         validMovies = new int[][]{{3, 1}, {4, 1}, {5, 2}, {5, 3}, {6, 4}, {4, 3}, {4, 4}, {4, 5}, {3, 1}};
-        assert (checkMovies(chessBoard, 4, 2, validMovies));
+        assert (PieceTest.checkMovies(chessBoard, 4, 2, validMovies));
     }
 
     @Test
     void canAttackToPosition() {
         //Проверка недопустимых параметров
-        assert (checkNotValid(new Queen(ColorPiece.WHITE)));
+        assert (PieceTest.checkNotValid(new Queen(ColorPiece.WHITE)));
         //Проверка с фигурами
         ChessBoard chessBoard = new ChessBoard();
         chessBoard.board[4][2] = new Queen(ColorPiece.WHITE);
@@ -59,7 +59,7 @@ class QueenTest extends PieceTest {
         chessBoard.board[3][1] = new Horse(ColorPiece.BLACK);
         int[][] validAttacks = new int[][]{{3, 1}, {5, 2}, {6, 2}, {5, 3}, {4, 3}, {4, 4}, {3, 3}, {2, 4}, {1, 5},
                 {0, 6}, {3, 2}, {3, 1}, {2, 2}, {3, 2}};
-        assert (checkAttack(chessBoard, 4,2,validAttacks));
+        assert (PieceTest.checkAttack(chessBoard, 4,2,validAttacks));
 
 
     }

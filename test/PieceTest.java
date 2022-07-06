@@ -1,6 +1,6 @@
 public class PieceTest {
 
-    protected boolean checkNotValid(ChessPiece piece) {
+    static boolean checkNotValid(ChessPiece piece) {
         ChessBoard chessBoard = new ChessBoard();
         chessBoard.board[3][3] = piece;
 
@@ -41,7 +41,7 @@ public class PieceTest {
         return true;
     }
 
-    protected boolean checkMovies(ChessBoard chessBoard, int line, int colum, int[][] validMovies) {
+    static boolean checkMovies(ChessBoard chessBoard, int line, int colum, int[][] validMovies) {
         //Перебираем все клетки доски
         for (int toLine = 0; toLine < 8; toLine++) {
             for (int toColum = 0; toColum < 8; toColum++) {
@@ -71,7 +71,7 @@ public class PieceTest {
         return true;
     }
 
-    protected boolean checkAttack(ChessBoard chessBoard, int line, int colum, int[][] validAttacks) {
+    static boolean checkAttack(ChessBoard chessBoard, int line, int colum, int[][] validAttacks) {
         //Перебираем все клетки доски
         for (int toLine = 0; toLine < 8; toLine++) {
             for (int toColum = 0; toColum < 8; toColum++) {
