@@ -78,34 +78,16 @@ class PawnTest{
     void canAttackToPosition() {
         ChessBoard chessBoard = new ChessBoard();
         chessBoard.board[1][6] = new Pawn(ColorPiece.WHITE);
-        chessBoard.board[2][5] = new Pawn(ColorPiece.BLACK);
-        chessBoard.board[3][6] = new Horse(ColorPiece.WHITE);
-        int[][] validAttacks = new int[][]{{2, 5}};
+        int[][] validAttacks = new int[][]{{2, 5}, {2,7}};
         assert (PieceTest.checkAttack(chessBoard, 1, 6, validAttacks));
-        chessBoard = new ChessBoard();
-        chessBoard.board[4][3] = new Pawn(ColorPiece.WHITE);
-        chessBoard.board[5][4] = new Bishop(ColorPiece.BLACK);
-        chessBoard.board[4][2] = new Pawn(ColorPiece.BLACK);
-        validAttacks = new int[][]{{5, 4}};
-        assert (PieceTest.checkAttack(chessBoard, 4, 3, validAttacks));
-        ((Pawn) chessBoard.board[4][2]).canBeEatenOnTheAisle = true;
-        validAttacks = new int[][]{{5, 4}, {5, 2}};
-        assert (PieceTest.checkAttack(chessBoard, 4, 3, validAttacks));
-        chessBoard = new ChessBoard();
-        chessBoard.board[6][6] = new Pawn(ColorPiece.BLACK);
-        chessBoard.board[5][5] = new Pawn(ColorPiece.WHITE);
-        chessBoard.board[5][7] = new Pawn(ColorPiece.BLACK);
-        chessBoard.board[5][6] = new Horse(ColorPiece.WHITE);
-        validAttacks = new int[][]{{5, 5}};
-        assert (PieceTest.checkAttack(chessBoard, 6, 6, validAttacks));
-        chessBoard = new ChessBoard();
-        chessBoard.board[3][3] = new Pawn(ColorPiece.BLACK);
-        chessBoard.board[3][2] = new Pawn(ColorPiece.WHITE);
-        validAttacks = new int[0][0];
-        assert (PieceTest.checkAttack(chessBoard, 3, 3, validAttacks));
-        ((Pawn) chessBoard.board[3][2]).canBeEatenOnTheAisle = true;
-        validAttacks = new int[][]{{2, 2}};
-        assert (PieceTest.checkAttack(chessBoard, 3, 3, validAttacks));
-
+        chessBoard.board[2][5] = new Rook(ColorPiece.WHITE);
+        chessBoard.board[2][7] = new Bishop(ColorPiece.BLACK);
+        assert (PieceTest.checkAttack(chessBoard, 1, 6, validAttacks));
+        chessBoard.board[6][3] = new Pawn(ColorPiece.BLACK);
+        validAttacks = new int[][]{{5, 4}, {5,2}};
+        assert (PieceTest.checkAttack(chessBoard, 6, 3, validAttacks));
+        chessBoard.board[5][4] = new Horse(ColorPiece.WHITE);
+        chessBoard.board[5][2] =  new Queen(ColorPiece.BLACK);
+        assert (PieceTest.checkAttack(chessBoard, 6, 3, validAttacks));
     }
 }

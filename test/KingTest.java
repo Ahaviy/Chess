@@ -40,15 +40,22 @@ class KingTest {
         chessBoard.board[5][5] = new Horse(ColorPiece.WHITE);
         validMovies = new int[][]{{3,2},{4,4},{4,2}};
         assert (PieceTest.checkMovies(chessBoard, 3, 3, validMovies));
-
-
-    }
-
-    @Test
-    void canAttackToPosition() {
+        chessBoard = new ChessBoard();
+        chessBoard.board[3][3] = new King(ColorPiece.BLACK);
+        chessBoard.board[1][2] = new Queen(ColorPiece.WHITE);
+        chessBoard.board[5][4] = new Bishop(ColorPiece.WHITE);
+        validMovies = new int[][]{{4,4},{2,4}};
+        assert (PieceTest.checkMovies(chessBoard, 3, 3, validMovies));
     }
 
     @Test
     void isUnderAttack() {
+        ChessBoard chessBoard = new ChessBoard();
+        chessBoard.board[3][3] = new King(ColorPiece.WHITE);
+        chessBoard.board[1][3] = new King(ColorPiece.BLACK);
+        int[][] validMovies = new int[][]{{4,3},{3,2},{3,4},{4,4},{4,2}};
+        assert (PieceTest.checkMovies(chessBoard, 3, 3, validMovies));
+        int[][] validAttacks= new int[][]{{2,3},{4,3},{3,2},{3,4},{4,4},{2,2},{4,2},{2,4}};
+        assert (PieceTest.checkAttack(chessBoard,3,3,validAttacks));
     }
 }

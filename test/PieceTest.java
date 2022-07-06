@@ -92,7 +92,7 @@ public class PieceTest {
             }
         }
         for (int[] validAttack : validAttacks) {
-            if (!chessBoard.board[line][colum].canMoveToPosition(chessBoard, line, colum, validAttack[0], validAttack[1])) {
+            if (!chessBoard.board[line][colum].canAttackToPosition(chessBoard, line, colum, validAttack[0], validAttack[1])) {
                 System.out.println("Coordinates in the list not valid: " + validAttack[0] + ", " + validAttack[1]);
                 return false;
             }

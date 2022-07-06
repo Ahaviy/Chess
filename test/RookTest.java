@@ -2,7 +2,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class RookTest{
+class RookTest {
 
     @Test
     void getColor() {
@@ -48,7 +48,7 @@ class RookTest{
         chessBoard.board[5][5] = new Horse(ColorPiece.WHITE);
         chessBoard.board[3][2] = new Queen(ColorPiece.BLACK);
         chessBoard.board[3][6] = new Bishop(ColorPiece.WHITE);
-        int[][] validAttacks = new int[][]{{1, 5}, {2, 5}, {4, 5}, {3, 2}, {3, 3}, {3, 4}};
-        assert(PieceTest.checkAttack(chessBoard,3,5,validAttacks));
+        int[][] validAttacks = new int[][]{{1, 5}, {2, 5}, {4, 5}, {3, 2}, {3, 3}, {3, 4}, {5, 5}, {3, 6}};
+        assert (PieceTest.checkAttack(chessBoard, 3, 5, validAttacks));
     }
 }

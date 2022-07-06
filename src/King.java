@@ -23,8 +23,6 @@ public class King extends ChessPiece {
         if (chessBoard.board[toLine][toColumn] != null && isSameColor(chessBoard.board[toLine][toColumn])) return false;
         if (isUnderAttack(chessBoard, toLine, toColumn)) return false;
         if ((line - toLine >= -1 && line - toLine <= 1) && (colum - toColumn >= -1 && colum - toColumn <= 1)) {
-//            if ((colum == toColumn && line != toLine) || (colum != toColumn && line == toLine)) return true;
-//            if ((line - toLine == colum - toColumn) || (line - toLine == toColumn - colum)) return true;
             return true;
         }
         return false;
@@ -33,10 +31,7 @@ public class King extends ChessPiece {
     @Override
     public boolean canAttackToPosition(ChessBoard chessBoard, int line, int colum, int toLine, int toColumn) {
         if (isCoordinatesNotValid(line, toLine, colum, toColumn)) return false;
-        if (chessBoard.board[toLine][toColumn] != null && isSameColor(chessBoard.board[toLine][toColumn])) return false;
         if ((line - toLine >= -1 && line - toLine <= 1) && (colum - toColumn >= -1 && colum - toColumn <= 1)) {
-//            if ((colum == toColumn && line != toLine) || (colum != toColumn && line == toLine)) return true;
-//            if ((line - toLine == colum - toColumn) || (line - toLine == toColumn - colum)) return true;
             return true;
         }
         return false;

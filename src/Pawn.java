@@ -35,7 +35,7 @@ public class Pawn extends ChessPiece {
             }
             return false;
         } else {
-            if (canTakeOnTheAisle(chessBoard, line, colum,toLine, toColumn)) return true; //Проверка взятия на проходе
+            if (canTakeOnTheAisle(chessBoard, line, colum, toLine, toColumn)) return true; //Проверка взятия на проходе
             if ((colum - toColumn) == 1 || (toColumn - colum) == 1) {
                 if (this.isWhite()) {
                     if ((toLine - line) == 1 && chessBoard.board[toLine][toColumn] != null
@@ -51,7 +51,8 @@ public class Pawn extends ChessPiece {
 
     @Override
     public boolean canAttackToPosition(ChessBoard chessBoard, int line, int colum, int toLine, int toColumn) {
-        if (isCoordinatesNotValid(line, toLine, colum, toColumn)) return false; if ((colum - toColumn) == 1 || (toColumn - colum) == 1) {
+        if (isCoordinatesNotValid(line, toLine, colum, toColumn)) return false;
+        if ((colum - toColumn) == 1 || (toColumn - colum) == 1) {
             if (this.isWhite()) {
                 if ((toLine - line) == 1) return true;
             } else {

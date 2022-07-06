@@ -2,7 +2,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class HorseTest{
+class HorseTest {
 
     @Test
     void getColor() {
@@ -44,7 +44,7 @@ class HorseTest{
         chessBoard.board[2][5] = new Rook(ColorPiece.BLACK);
         chessBoard.board[4][1] = new Pawn(ColorPiece.WHITE);
         chessBoard.board[4][5] = new Horse(ColorPiece.WHITE);
-        int[][] validMovies = new int[][]{{4, 5}, {4, 1}, {5, 4}, {5, 2}, {2, 1}, {1, 2}};
+        int[][] validMovies = new int[][]{{4, 5}, {4, 1}, {5, 4}, {5, 2}, {2, 1}, {1, 2}, {1, 4}, {2, 5}};
         assert (PieceTest.checkAttack(chessBoard, 3, 3, validMovies));
     }
 }

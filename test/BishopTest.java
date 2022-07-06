@@ -47,8 +47,9 @@ class BishopTest {
         chessBoard.board[7][2] = new Horse(ColorPiece.WHITE);
         chessBoard.board[6][3] = new Horse(ColorPiece.BLACK);
         chessBoard.board[2][7] = new Rook(ColorPiece.WHITE);
-        int[][] validAttack = new int[][]{{6, 5}, {7, 6}, {4, 5}, {3, 6}, {2, 7}, {4, 3}, {3, 2}, {2, 1}, {1, 0}};
-        assert(PieceTest.checkAttack(chessBoard, 5,4, validAttack));
+        int[][] validAttack = new int[][]{{6, 5}, {7, 6}, {4, 5}, {3, 6}, {2, 7}, {4, 3}, {3, 2}, {2, 1}, {1, 0},
+                {6, 3}};
+        assert (PieceTest.checkAttack(chessBoard, 5, 4, validAttack));
 
     }
 }

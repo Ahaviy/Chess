@@ -58,8 +58,8 @@ class QueenTest {
         chessBoard.board[7][5] = new Queen(ColorPiece.BLACK);
         chessBoard.board[3][1] = new Horse(ColorPiece.BLACK);
         int[][] validAttacks = new int[][]{{3, 1}, {5, 2}, {6, 2}, {5, 3}, {4, 3}, {4, 4}, {3, 3}, {2, 4}, {1, 5},
-                {0, 6}, {3, 2}, {3, 1}, {2, 2}, {3, 2}};
-        assert (PieceTest.checkAttack(chessBoard, 4,2,validAttacks));
+                {0, 6}, {3, 2}, {3, 1}, {2, 2}, {3, 2}, {4, 1}, {4, 5}, {5, 1}, {6, 4}};
+        assert (PieceTest.checkAttack(chessBoard, 4, 2, validAttacks));
 
 
     }
