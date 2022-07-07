@@ -15,33 +15,16 @@ public class ChessBoard {
     }
 
     public boolean moveToPosition(int line, int column, int toLine, int toColumn) {
+        //TODO Проверки перед ходом
         if (checkPos(line) && checkPos(column)) {
 
             if (!nowPlayer.equals(board[line][column].getColor())) return false;
+            if (!board[line][column].canMoveToPosition(this, line, column, toLine, toColumn)) return false;
 
-            if (board[line][column].canMoveToPosition(this, line, column, toLine, toColumn)) {
 
-                if (board[line][column].getSymbol().equals("K") ||  // check position for castling
-                        board[line][column].getSymbol().equals("R")) {
-                    board[line][column].check = false;
-                }
-                preMove();
-                //TODO Проверки для пешек
-                if (board[line][column].getSymbol().equals("P")){
-                    if (board[line][column].getColor().equals("White")) {
+            makeMove(line, column, toLine, toColumn, false);
+            return true;
 
-                    } else {
-
-                    }
-                }
-
-                board[toLine][toColumn] = board[line][column]; // if piece can move, we moved a piece
-                board[line][column] = null; // set null to previous cell
-
-                this.nowPlayer = this.nowPlayerColor().equals("White") ? "Black" : "White";
-
-                return true;
-            } else return false;
         } else return false;
     }
 
@@ -80,14 +63,7 @@ public class ChessBoard {
                 if (board[0][0].getColor().equals("White") && board[0][4].getColor().equals("White") &&
                         board[0][0].check && board[0][4].check &&
                         !new King("White").isUnderAttack(this, 0, 2)) { // check that position not in under attack
-                    preMove();
-                    board[0][4] = null;
-                    board[0][2] = new King("White");   // move King
-                    board[0][2].check = false;
-                    board[0][0] = null;
-                    board[0][3] = new Rook("White");   // move Rook
-                    board[0][3].check = false;
-                    nowPlayer = "Black";  // next turn
+                    makeMove(0, 4, 0, 0, true);
                     return true;
                 } else return false;
             } else return false;
@@ -98,14 +74,7 @@ public class ChessBoard {
                 if (board[7][0].getColor().equals("Black") && board[7][4].getColor().equals("Black") &&
                         board[7][0].check && board[7][4].check &&
                         !new King("Black").isUnderAttack(this, 7, 2)) { // check that position not in under attack
-                    preMove();
-                    board[7][4] = null;
-                    board[7][2] = new King("Black");   // move King
-                    board[7][2].check = false;
-                    board[7][0] = null;
-                    board[7][3] = new Rook("Black");   // move Rook
-                    board[7][3].check = false;
-                    nowPlayer = "White";  // next turn
+                    makeMove(7, 4, 7, 0, true);
                     return true;
                 } else return false;
             } else return false;
@@ -120,14 +89,7 @@ public class ChessBoard {
                 if (board[0][7].getColor().equals("White") && board[0][4].getColor().equals("White") &&
                         board[0][7].check && board[0][4].check &&
                         !new King("White").isUnderAttack(this, 0, 6)) { // check that position not in under attack
-                    preMove();
-                    board[0][4] = null;
-                    board[0][6] = new King("White");   // move King
-                    board[0][6].check = false;
-                    board[0][7] = null;
-                    board[0][5] = new Rook("White");   // move Rook
-                    board[0][5].check = false;
-                    nowPlayer = "Black";  // next turn
+                    makeMove(0, 4, 0, 7, true);
                     return true;
                 } else return false;
             } else return false;
@@ -138,32 +100,75 @@ public class ChessBoard {
                 if (board[7][7].getColor().equals("Black") && board[7][4].getColor().equals("Black") &&
                         board[7][7].check && board[7][4].check &&
                         !new King("Black").isUnderAttack(this, 7, 6)) { // check that position not in under attack
-                    preMove();
-                    board[7][4] = null;
-                    board[7][6] = new King("Black");   // move King
-                    board[7][6].check = false;
-                    board[7][7] = null;
-                    board[7][5] = new Rook("Black");   // move Rook
-                    board[7][5].check = false;
-                    nowPlayer = "White";  // next turn
+                    makeMove(7, 4, 7, 7, true);
                     return true;
                 } else return false;
             } else return false;
         }
     }
 
-    private void preMove(){
-//        Проверяем все клетки, ищем все пешки, обнуляем проверку на возможность взятия на проходе
+
+    public void makeMove(int line, int column, int toline, int toColumn, boolean isCastling) {
+        //Проверяем все клетки, ищем все пешки, обнуляем проверку на возможность взятия на проходе
         for (int Line = 0; Line < 7; Line++) {
             for (int Colum = 0; Colum < 7; Colum++) {
-                if (board[Line][Colum] != null && board[Line][Colum].getSymbol().equals("P")){
-                    ((Pawn)board[Line][Colum]).canBeEatenOnTheAisle =false;
+                if (board[Line][Colum] != null && board[Line][Colum].getSymbol().equals("P")) {
+                    ((Pawn) board[Line][Colum]).canBeEatenOnTheAisle = false;
                 }
             }
         }
-
-
+        if (isCastling) { //Если рокировка
+            if (toColumn == 0) { //длинная рокировка
+                board[line][2] = board[line][4];
+                board[line][2].check = false;
+                board[line][4] = null;
+                board[line][3] = board[line][0];
+                board[line][3].check = false;
+                board[line][0] = null;
+            } else { //короткая рокировка
+                board[line][6] = board[line][4];
+                board[line][6].check = false;
+                board[line][4] = null;
+                board[line][5] = board[line][7];
+                board[line][5].check = false;
+                board[line][7] = null;
+            }
+        } else {
+            if (board[line][column].getSymbol().equals("P")) { //Проверки для пешек перед заменой на доске
+                //если пешка достигает последней линии предворительно заменяется на выбранную фигуру
+                if (board[line][column].isWhite() && line == 6) {
+                    board[line][column] = getPieceFromPawn(ColorPiece.WHITE);
+                }
+                if (!board[line][column].isWhite() && line == 1) {
+                    board[line][column] = getPieceFromPawn(ColorPiece.BLACK);
+                }
+                //если пешка может съесть на проходе, то съедаеммую пешку переносим на клетку назад
+                if (((Pawn) board[line][column]).canTakeOnTheAisle(this, line, column, toline, toColumn)) {
+                    if (board[line][column].isWhite()) {
+                        board[5][toColumn] = board[4][toColumn];
+                        board[4][toColumn] = null;
+                    } else {
+                        board[2][toColumn] = board[3][toColumn];
+                        board[3][toColumn] = null;
+                    }
+                }
+            }
+            //Перемещение фигуры
+            board[toline][toColumn] = board[line][column];
+            if (board[toline][toColumn].getSymbol().equals("K") || board[toline][toColumn].getSymbol().equals("R")) {
+                board[toline][toColumn].check = false;
+            }
+            board[line][column] = null;
+        }
+        nowPlayer = this.nowPlayerColor().equals("White") ? "Black" : "White"; //смена игрока
     }
+
+    private ChessPiece getPieceFromPawn(ColorPiece color) {
+        //TODO реализовать выбор фигуры
+        return new Queen(color); //заглушка
+    }
+
+
 
 /*    public boolean castlingWithH() {
         if (nowPlayer.equals("White")) {

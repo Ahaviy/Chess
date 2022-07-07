@@ -63,7 +63,7 @@ public class Pawn extends ChessPiece {
     }
 
 
-    private boolean canTakeOnTheAisle(ChessBoard chessBoard, int line, int column, int toLine, int toColumn) {
+    public boolean canTakeOnTheAisle(ChessBoard chessBoard, int line, int column, int toLine, int toColumn) {
         if (chessBoard.board[line][column].isWhite()) {
             if (line == 4 && toLine == 5 //Пешка стоит на 4-й линии
                     && chessBoard.board[4][toColumn] != null //На целевой колонке и 4-й линии есть фигура
