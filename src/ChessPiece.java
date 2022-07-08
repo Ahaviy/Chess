@@ -19,10 +19,42 @@ public abstract class ChessPiece {
 
     public abstract String getSymbol();
 
-    public boolean isWhite() {
-        if (color.equals("White")) return true;
-        return false;
+    public boolean isHorse() {
+        return getSymbol().equals("H");
     }
+
+    public boolean isPawn() {
+        return getSymbol().equals("P");
+    }
+
+    public boolean isBishop() {
+        return getSymbol().equals("B");
+    }
+
+    public boolean isRook() {
+        return getSymbol().equals("R");
+    }
+
+    public boolean isQueen() {
+        return getSymbol().equals("Q");
+    }
+
+    public boolean isKing() {
+        return getSymbol().equals("K");
+    }
+
+    public boolean isWhite() {
+        return color.equals("White");
+    }
+
+    public boolean isBlack() {
+        return color.equals("Black");
+    }
+
+    public ColorPiece getColorPiece() {
+        return isWhite() ? ColorPiece.WHITE : ColorPiece.BLACK;
+    }
+
     public boolean isSameColor(ChessPiece piece) {
         if (piece == null) return false;
         if (this.color.equals(piece.getColor())) return true;
