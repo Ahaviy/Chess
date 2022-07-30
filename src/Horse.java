@@ -3,13 +3,19 @@ public class Horse extends ChessPiece {
         super(color);
     }
 
-    public Horse(ColorPiece colorPiece) {
-        super(colorPiece);
+    public Horse(Color color) {
+        super(color);
     }
 
     @Override
     public String getColor() {
         return color;
+    }
+
+    @Override
+    public boolean is(Piece piece) {
+        if (piece == null) return false;
+        return piece == Piece.HORSE;
     }
 
     @Override

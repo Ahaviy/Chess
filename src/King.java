@@ -3,8 +3,8 @@ public class King extends ChessPiece {
         super(color);
     }
 
-    public King(ColorPiece colorPiece) {
-        super(colorPiece);
+    public King(Color color) {
+        super(color);
     }
 
     @Override
@@ -15,6 +15,12 @@ public class King extends ChessPiece {
     @Override
     public String getSymbol() {
         return "K";
+    }
+
+    @Override
+    public boolean is(Piece piece) {
+        if (piece == null) return false;
+        return piece == Piece.KING;
     }
 
     @Override

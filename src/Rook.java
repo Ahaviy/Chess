@@ -4,8 +4,8 @@ public class Rook extends ChessPiece {
         super(color);
     }
 
-    public Rook(ColorPiece colorPiece) {
-        super(colorPiece);
+    public Rook(Color color) {
+        super(color);
     }
 
     @Override
@@ -16,6 +16,12 @@ public class Rook extends ChessPiece {
     @Override
     public String getSymbol() {
         return "R";
+    }
+
+    @Override
+    public boolean is(Piece piece) {
+        if (piece == null) return false;
+        return piece == Piece.ROOK;
     }
 
     @Override

@@ -65,7 +65,7 @@ public class Main {
                             if (board.isCheck(board.nowPlayerColorPiece())) {
                                 if (board.isCheckMate()) {
                                     System.out.print(", мат!");
-                                    String winner = board.nowPlayerColorPiece() == ColorPiece.WHITE ? "Черные " : "Белые ";
+                                    String winner = board.nowPlayerColorPiece() == Color.WHITE ? "Черные " : "Белые ";
                                     System.out.println(winner + "выйграли!");
                                     System.out.println("Хотите сыграть ещё? (y/n)");
                                     while (true) {

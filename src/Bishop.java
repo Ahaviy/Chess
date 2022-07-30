@@ -5,8 +5,8 @@ public class Bishop extends ChessPiece {
         super(color);
     }
 
-    public Bishop(ColorPiece colorPiece) {
-        super(colorPiece);
+    public Bishop(Color color) {
+        super(color);
     }
 
     @Override
@@ -17,6 +17,12 @@ public class Bishop extends ChessPiece {
     @Override
     public String getSymbol() {
         return "B";
+    }
+
+    @Override
+    public boolean is(Piece piece) {
+        if (piece == null) return false;
+        return piece == Piece.BISHOP;
     }
 
     @Override

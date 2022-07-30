@@ -1,11 +1,11 @@
-public enum ColorPiece { WHITE("White"), BLACK("Black");
+public enum Color { WHITE("White"), BLACK("Black");
     private String color;
 
     public String getColor() {
         return color;
     }
 
-    ColorPiece(String color) {
+    Color(String color) {
         this.color = color;
     }
 }

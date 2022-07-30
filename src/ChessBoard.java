@@ -17,45 +17,45 @@ public class ChessBoard {
         return this.nowPlayer;
     }
 
-    public ColorPiece nowPlayerColorPiece() {
-        return nowPlayer.equals("White") ? ColorPiece.WHITE : ColorPiece.BLACK;
+    public Color nowPlayerColorPiece() {
+        return nowPlayer.equals("White") ? Color.WHITE : Color.BLACK;
     }
 
     public void newGame() {
         nowPlayer = "White";
-        board[0][0] = new Rook(ColorPiece.WHITE);
-        board[0][1] = new Horse(ColorPiece.WHITE);
-        board[0][2] = new Bishop(ColorPiece.WHITE);
-        board[0][3] = new Queen(ColorPiece.WHITE);
-        board[0][4] = new King(ColorPiece.WHITE);
-        board[0][5] = new Bishop(ColorPiece.WHITE);
-        board[0][6] = new Horse(ColorPiece.WHITE);
-        board[0][7] = new Rook(ColorPiece.WHITE);
-        board[1][0] = new Pawn(ColorPiece.WHITE);
-        board[1][1] = new Pawn(ColorPiece.WHITE);
-        board[1][2] = new Pawn(ColorPiece.WHITE);
-        board[1][6] = new Pawn(ColorPiece.WHITE);
-        board[1][7] = new Pawn(ColorPiece.WHITE);
-        board[1][4] = new Pawn(ColorPiece.WHITE);
-        board[1][5] = new Pawn(ColorPiece.WHITE);
-        board[1][3] = new Pawn(ColorPiece.WHITE);
+        board[0][0] = new Rook(Color.WHITE);
+        board[0][1] = new Horse(Color.WHITE);
+        board[0][2] = new Bishop(Color.WHITE);
+        board[0][3] = new Queen(Color.WHITE);
+        board[0][4] = new King(Color.WHITE);
+        board[0][5] = new Bishop(Color.WHITE);
+        board[0][6] = new Horse(Color.WHITE);
+        board[0][7] = new Rook(Color.WHITE);
+        board[1][0] = new Pawn(Color.WHITE);
+        board[1][1] = new Pawn(Color.WHITE);
+        board[1][2] = new Pawn(Color.WHITE);
+        board[1][6] = new Pawn(Color.WHITE);
+        board[1][7] = new Pawn(Color.WHITE);
+        board[1][4] = new Pawn(Color.WHITE);
+        board[1][5] = new Pawn(Color.WHITE);
+        board[1][3] = new Pawn(Color.WHITE);
 
-        board[7][0] = new Rook(ColorPiece.BLACK);
-        board[7][1] = new Horse(ColorPiece.BLACK);
-        board[7][2] = new Bishop(ColorPiece.BLACK);
-        board[7][3] = new Queen(ColorPiece.BLACK);
-        board[7][4] = new King(ColorPiece.BLACK);
-        board[7][5] = new Bishop(ColorPiece.BLACK);
-        board[7][6] = new Horse(ColorPiece.BLACK);
-        board[7][7] = new Rook(ColorPiece.BLACK);
-        board[6][0] = new Pawn(ColorPiece.BLACK);
-        board[6][1] = new Pawn(ColorPiece.BLACK);
-        board[6][2] = new Pawn(ColorPiece.BLACK);
-        board[6][3] = new Pawn(ColorPiece.BLACK);
-        board[6][4] = new Pawn(ColorPiece.BLACK);
-        board[6][5] = new Pawn(ColorPiece.BLACK);
-        board[6][6] = new Pawn(ColorPiece.BLACK);
-        board[6][7] = new Pawn(ColorPiece.BLACK);
+        board[7][0] = new Rook(Color.BLACK);
+        board[7][1] = new Horse(Color.BLACK);
+        board[7][2] = new Bishop(Color.BLACK);
+        board[7][3] = new Queen(Color.BLACK);
+        board[7][4] = new King(Color.BLACK);
+        board[7][5] = new Bishop(Color.BLACK);
+        board[7][6] = new Horse(Color.BLACK);
+        board[7][7] = new Rook(Color.BLACK);
+        board[6][0] = new Pawn(Color.BLACK);
+        board[6][1] = new Pawn(Color.BLACK);
+        board[6][2] = new Pawn(Color.BLACK);
+        board[6][3] = new Pawn(Color.BLACK);
+        board[6][4] = new Pawn(Color.BLACK);
+        board[6][5] = new Pawn(Color.BLACK);
+        board[6][6] = new Pawn(Color.BLACK);
+        board[6][7] = new Pawn(Color.BLACK);
     }
 
     public void printBoard() {  //print board in console
@@ -121,7 +121,7 @@ public class ChessBoard {
      * @return true - король под шахом
      * @return false - шаха нет
      */
-    public boolean isCheck(ColorPiece color) { //check = шах в данном месте синоним
+    public boolean isCheck(Color color) { //check = шах в данном месте синоним
         int[] kingCoords = findKing(color); //ищем короля
         if (kingCoords[0] == -1)
             return false; //хотя по логике надо выкидывать исключение, если короля нет на доске
@@ -138,7 +138,7 @@ public class ChessBoard {
      */
     public boolean isStaleMate() {
         //Ищем короля цвета текущего игрока
-        ColorPiece color = nowPlayerColorPiece();
+        Color color = nowPlayerColorPiece();
         int[] kingCoords = findKing(color);
         if (kingCoords[0] == -1)
             return false; //хотя по логике надо выкидывать исключение, если короля нет на доске
@@ -173,7 +173,7 @@ public class ChessBoard {
      */
     public boolean isCheckMate() {
         //Ищем короля цвета текущего игрока
-        ColorPiece color = nowPlayerColorPiece();
+        Color color = nowPlayerColorPiece();
         int[] kingCoords = findKing(color);
         if (kingCoords[0] == -1)
             return false; //хотя по логике надо выкидывать исключение, если короля нет на доске
@@ -209,9 +209,9 @@ public class ChessBoard {
         if (nowPlayer.equals("White")) {
             //Рокировку можно делать, если соблюдаются следующие правила:
             //Ни король, ни ладья, с которой делается рокировка, не делали до этого ни одного хода
-            if (board[0][0] == null || !board[0][0].isRook() || !board[0][0].isWhite() || !board[0][0].check)
+            if (board[0][0] == null || !board[0][0].is(Piece.ROOK) || !board[0][0].is(Color.WHITE) || !board[0][0].check)
                 return false;
-            if (board[0][4] == null || !board[0][4].isKing() || !board[0][4].isWhite() || !board[0][4].check)
+            if (board[0][4] == null || !board[0][4].is(Piece.KING) || !board[0][4].is(Color.WHITE) || !board[0][4].check)
                 return false;
             //Между королем и ладьей нет других фигур.
             if (board[0][1] != null || board[0][2] != null || board[0][3] != null) return false;
@@ -225,9 +225,9 @@ public class ChessBoard {
         } else {
             //Рокировку можно делать, если соблюдаются следующие правила:
             //Ни король, ни ладья, с которой делается рокировка, не делали до этого ни одного хода
-            if (board[7][0] == null || !board[7][0].isRook() || !board[7][0].isBlack() || !board[7][0].check)
+            if (board[7][0] == null || !board[7][0].is(Piece.ROOK) || !board[7][0].is(Color.BLACK) || !board[7][0].check)
                 return false;
-            if (board[7][4] == null || !board[7][4].isKing() || !board[7][4].isBlack() || !board[7][4].check)
+            if (board[7][4] == null || !board[7][4].is(Piece.KING) || !board[7][4].is(Color.BLACK) || !board[7][4].check)
                 return false;
             //Между королем и ладьей нет других фигур.
             if (board[7][1] != null || board[7][2] != null || board[7][3] != null) return false;
@@ -250,9 +250,9 @@ public class ChessBoard {
         if (nowPlayer.equals("White")) {
             //Рокировку можно делать, если соблюдаются следующие правила:
             //Ни король, ни ладья, с которой делается рокировка, не делали до этого ни одного хода
-            if (board[0][7] == null || !board[0][7].isRook() || !board[0][7].isWhite() || !board[0][7].check)
+            if (board[0][7] == null || !board[0][7].is(Piece.ROOK) || !board[0][7].is(Color.WHITE) || !board[0][7].check)
                 return false;
-            if (board[0][4] == null || !board[0][4].isKing() || !board[0][4].isWhite() || !board[0][4].check)
+            if (board[0][4] == null || !board[0][4].is(Piece.KING) || !board[0][4].is(Color.WHITE) || !board[0][4].check)
                 return false;
             //Между королем и ладьей нет других фигур.
             if (board[0][6] != null || board[0][5] != null) return false;
@@ -266,9 +266,9 @@ public class ChessBoard {
         } else {
             //Рокировку можно делать, если соблюдаются следующие правила:
             //Ни король, ни ладья, с которой делается рокировка, не делали до этого ни одного хода
-            if (board[7][7] == null || !board[7][7].isRook() || !board[7][7].isBlack() || !board[7][7].check)
+            if (board[7][7] == null || !board[7][7].is(Piece.ROOK) || !board[7][7].is(Color.BLACK) || !board[7][7].check)
                 return false;
-            if (board[7][4] == null || !board[7][4].isKing() || !board[7][4].isBlack() || !board[7][4].check)
+            if (board[7][4] == null || !board[7][4].is(Piece.KING) || !board[7][4].is(Color.BLACK) || !board[7][4].check)
                 return false;
             //Между королем и ладьей нет других фигур.
             if (board[7][6] != null || board[7][5] != null) return false;
@@ -293,9 +293,9 @@ public class ChessBoard {
      */
     private void makeMove(int line, int column, int toLine, int toColumn, boolean isCastling, boolean checkForCheck) {
         //если пешка может съесть на проходе, то съедаеммую пешку переносим на клетку назад
-        if (board[line][column].isPawn()
+        if (board[line][column].is(Piece.PAWN)
                 && ((Pawn) board[line][column]).canTakeOnTheAisle(this, line, column, toLine, toColumn)) {
-            if (board[line][column].isWhite()) {
+            if (board[line][column].is(Color.WHITE)) {
                 board[5][toColumn] = board[4][toColumn];
                 board[4][toColumn] = null;
             } else {
@@ -307,7 +307,7 @@ public class ChessBoard {
             //Проверяем все клетки, ищем все пешки, обнуляем проверку на возможность взятия на проходе
             for (int Line = 0; Line < 7; Line++) {
                 for (int Colum = 0; Colum < 7; Colum++) {
-                    if (board[Line][Colum] != null && board[Line][Colum].isPawn()) {
+                    if (board[Line][Colum] != null && board[Line][Colum].is(Piece.PAWN)) {
                         ((Pawn) board[Line][Colum]).canBeEatenOnTheAisle = false;
                     }
                 }
@@ -331,21 +331,21 @@ public class ChessBoard {
                 board[line][7] = null;
             }
         } else {
-            if (board[line][column].isPawn()) { //Проверки для пешек перед заменой на доске
+            if (board[line][column].is(Piece.PAWN)) { //Проверки для пешек перед заменой на доске
                 //если пешка достигает последней линии предворительно заменяется на выбранную фигуру
                 //проверка на checkForCheck нужна что бы во время проверки на ход под шах не было выбора фигуры
-                if (board[line][column].isWhite() && line == 6 && !checkForCheck) {
-                    board[line][column] = getPieceFromPawn(ColorPiece.WHITE);
+                if (board[line][column].is(Color.WHITE) && line == 6 && !checkForCheck) {
+                    board[line][column] = getPieceFromPawn(Color.WHITE);
                 }
-                if (board[line][column].isBlack() && line == 1 && !checkForCheck) {
-                    board[line][column] = getPieceFromPawn(ColorPiece.BLACK);
+                if (board[line][column].is(Color.BLACK) && line == 1 && !checkForCheck) {
+                    board[line][column] = getPieceFromPawn(Color.BLACK);
                 }
                 if ((line == 1 && toLine == 3) || (line == 6 && toLine == 4))
                     ((Pawn) board[line][column]).canBeEatenOnTheAisle = true;
             }
             //Перемещение фигуры
             board[toLine][toColumn] = board[line][column];
-            if (!checkForCheck && (board[toLine][toColumn].isKing() || board[toLine][toColumn].isRook())) {
+            if (!checkForCheck && (board[toLine][toColumn].is(Piece.KING) || board[toLine][toColumn].is(Piece.ROOK))) {
                 board[toLine][toColumn].check = false;
             }
             board[line][column] = null;
@@ -355,7 +355,7 @@ public class ChessBoard {
     /**
      * Возращает фигуру в которую превращается пешка, которая достигает последней линии доски
      * */
-    public ChessPiece getPieceFromPawn(ColorPiece color) {
+    public ChessPiece getPieceFromPawn(Color color) {
         System.out.print("выберите фигуру (Q - ферзь, R - лодья, B - слон, H - конь): ");
         Scanner scanner = new Scanner(System.in);
         String s;
@@ -376,12 +376,12 @@ public class ChessBoard {
      * Возвращает координаты на доске, где стоит король
      * @param color - цвет короля
      * */
-    private int[] findKing(ColorPiece color) {
+    private int[] findKing(Color color) {
         int[] kingCoordinates = new int[]{-1, -1};
         for (int line = 0; line < 8; line++) {
             for (int column = 0; column < 8; column++) {
                 if (board[line][column] != null && board[line][column].getColorPiece() == color
-                        && board[line][column].isKing()) {
+                        && board[line][column].is(Piece.KING)) {
                     kingCoordinates[0] = line;
                     kingCoordinates[1] = column;
                     break;

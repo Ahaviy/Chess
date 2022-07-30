@@ -3,62 +3,39 @@ public abstract class ChessPiece {
     protected String color;
     boolean check = true;
 
-    public ChessPiece(String color) {
-        this.color = color;
-    }
-
-    public ChessPiece(ColorPiece colorPiece) {
-        this.color = colorPiece.getColor();
-    }
-
     public abstract String getColor();
+
+    public abstract String getSymbol();
 
     public abstract boolean canMoveToPosition(ChessBoard chessBoard, int line, int colum, int toLine, int toColumn);
 
     public abstract boolean canAttackToPosition(ChessBoard chessBoard, int line, int colum, int toLine, int toColumn);
 
-    public abstract String getSymbol();
+    public abstract boolean is(Piece piece);
 
-    public boolean isHorse() {
-        return getSymbol().equals("H");
-    }
-
-    public boolean isPawn() {
-        return getSymbol().equals("P");
-    }
-
-    public boolean isBishop() {
-        return getSymbol().equals("B");
-    }
-
-    public boolean isRook() {
-        return getSymbol().equals("R");
-    }
-
-    public boolean isQueen() {
-        return getSymbol().equals("Q");
-    }
-
-    public boolean isKing() {
-        return getSymbol().equals("K");
-    }
-
-    public boolean isWhite() {
-        return color.equals("White");
-    }
-
-    public boolean isBlack() {
-        return color.equals("Black");
-    }
-
-    public ColorPiece getColorPiece() {
-        return isWhite() ? ColorPiece.WHITE : ColorPiece.BLACK;
+    public boolean is(Color pieceColor) {
+        if (pieceColor == null) return false;
+        if (pieceColor == Color.WHITE && color.equals("White")) return true;
+        if (pieceColor == Color.BLACK && color.equals("Black")) return true;
+        return false;
     }
 
     public boolean isSameColor(ChessPiece piece) {
         if (piece == null) return false;
         if (this.color.equals(piece.getColor())) return true;
         return false;
+    }
+
+    public ChessPiece(String color) {
+        this.color = color;
+    }
+
+    public ChessPiece(Color color) {
+        this.color = color.getColor();
+    }
+
+    public Color getColorPiece() {
+        return is(Color.WHITE) ? Color.WHITE : Color.BLACK;
     }
 
     protected boolean isCoordinatesNotValid(int line, int toLine, int colum, int toColumn) {
