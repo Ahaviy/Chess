@@ -35,39 +35,14 @@ public class Bishop extends ChessPiece {
     @Override
     public boolean canAttackToPosition(ChessBoard chessBoard, int line, int colum, int toLine, int toColumn) {
         if (isCoordinatesNotValid(line, toLine, colum, toColumn)) return false;
-
-        if (line - toLine == colum - toColumn) { //Проверка возрастающей диагонали
-            if (line > toLine) { //левая часть
-                for (int checkingLine = toLine + 1; checkingLine < line; checkingLine++) {
-                    int checkingColum = checkingLine - line + colum;
-                    if (chessBoard.board[checkingLine][checkingColum] != null) return false; //если на пути есть фигура
-                }
-            } else { //правая часть
-                for (int checkingLine = toLine - 1; checkingLine > line; checkingLine--) {
-                    int checkingColum = checkingLine - line + colum;
-                    if (chessBoard.board[checkingLine][checkingColum] != null) return false; //если на пути есть фигура
-                }
-            }
-            return true;
-        }
-        if (line - toLine == toColumn - colum) { //Поверка убывающей диагонали
-            if (line > toLine) { //левая часть
-                for (int checkingLine = toLine + 1; checkingLine < line; checkingLine++) {
-                    int checkingColum = line - checkingLine + colum;
-                    if (chessBoard.board[checkingLine][checkingColum] != null) return false; //если на пути есть фигура
-                }
-            } else { //правая часть
-                for (int checkingLine = toLine - 1; checkingLine > line; checkingLine--) {
-                    int checkingColum = line - checkingLine + colum;
-                    if (chessBoard.board[checkingLine][checkingColum] != null) return false; //если на пути есть фигура
-                }
+        if (Math.abs(line - toLine) == Math.abs(colum - toColumn)) { //Если диагональ
+            for (int checkingLine = Math.min(line, toLine) + 1; checkingLine < Math.max(line, toLine); checkingLine++) {
+                int checkingColum = (colum == toColumn - toLine + line) ?
+                        colum + checkingLine - line : colum + line - checkingLine;
+                if (chessBoard.board[checkingLine][checkingColum] != null) return false; //если на пути есть фигура
             }
             return true;
         }
         return false;
-
-
-
-
     }
 }
